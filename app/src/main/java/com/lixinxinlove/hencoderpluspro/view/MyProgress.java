@@ -1,5 +1,6 @@
 package com.lixinxinlove.hencoderpluspro.view;
 
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -38,8 +39,12 @@ public class MyProgress extends View {
     private RectF rectF;
 
     private float progress;  // 0--100     0--240   * 2.4
+    private int progressColor;  // 0--100     0--240   * 2.4
 
     private ObjectAnimator animator;
+    private ObjectAnimator animatorColor;
+
+    private AnimatorSet animationSet;
 
     public MyProgress(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -64,20 +69,25 @@ public class MyProgress extends View {
         rectF = new RectF(100, 100, 500, 450);
         progress = 0;
         animator = ObjectAnimator.ofFloat(this, "progress", 0, 100);
-        animator.setDuration(2000);
-        //animator.setRepeatCount(-1);
+        animatorColor = ObjectAnimator.ofArgb(this, "progressColor", 0xffff0000, 0xff00ff00);
+        animator.setDuration(4000);
+        animatorColor.setDuration(4000);
+        animator.setRepeatCount(-1);
         animator.setInterpolator(new BounceInterpolator());
-        animator.start();
+        animatorColor.setInterpolator(new BounceInterpolator());
+
+        animationSet = new AnimatorSet();
+        animationSet.playTogether(animator, animatorColor);
+        animationSet.start();
     }
 
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        mPaint.setColor(progressColor);
         canvas.drawArc(rectF, 150, progress * 2.4f, false, mPaint);
-
-        canvas.drawText((int)progress + "%", 270, 260, mPaintText);
-
+        canvas.drawText((int) progress + "%", 270, 260, mPaintText);
     }
 
 
@@ -90,5 +100,11 @@ public class MyProgress extends View {
         invalidate();
     }
 
+    public int getProgressColor() {
+        return progressColor;
+    }
 
+    public void setProgressColor(int progressColor) {
+        this.progressColor = progressColor;
+    }
 }
