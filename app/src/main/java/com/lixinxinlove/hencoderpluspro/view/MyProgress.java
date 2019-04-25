@@ -33,6 +33,7 @@ public class MyProgress extends View {
 
 
     private Paint mPaint;
+    private Paint mPaintText;
 
     private RectF rectF;
 
@@ -53,11 +54,18 @@ public class MyProgress extends View {
         mPaint.setStrokeCap(Paint.Cap.ROUND);
         mPaint.setStyle(Paint.Style.STROKE);
 
+
+        mPaintText = new Paint();
+        mPaintText.setAntiAlias(true);
+        mPaintText.setStrokeWidth(10);
+        mPaintText.setTextSize(40);
+
+
         rectF = new RectF(100, 100, 500, 450);
         progress = 0;
         animator = ObjectAnimator.ofFloat(this, "progress", 0, 100);
         animator.setDuration(2000);
-        animator.setRepeatCount(-1);
+        //animator.setRepeatCount(-1);
         animator.setInterpolator(new BounceInterpolator());
         animator.start();
     }
@@ -67,6 +75,9 @@ public class MyProgress extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.drawArc(rectF, 150, progress * 2.4f, false, mPaint);
+
+        canvas.drawText((int)progress + "%", 270, 260, mPaintText);
+
     }
 
 
@@ -78,8 +89,6 @@ public class MyProgress extends View {
         this.progress = progress;
         invalidate();
     }
-
-
 
 
 }
