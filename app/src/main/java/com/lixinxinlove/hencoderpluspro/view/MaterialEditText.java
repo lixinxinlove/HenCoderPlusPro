@@ -103,6 +103,7 @@ public class MaterialEditText extends androidx.appcompat.widget.AppCompatEditTex
 
     private ObjectAnimator getAnimator() {
         if (animator == null) {
+            //默认动画时间为 300ms
             animator = ObjectAnimator.ofFloat(MaterialEditText.this, "floatingLabelFraction", 0, 1);
             animator.addListener(new Animator.AnimatorListener() {
                 @Override
