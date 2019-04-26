@@ -64,7 +64,7 @@ public class CameraView extends View {
 
         camera = new Camera();
 
-        point1 = new Point(0, 0);
+        point1 = new Point(50, 50);
         point2 = new Point(200, 200);
 
     }
@@ -89,10 +89,13 @@ public class CameraView extends View {
 
         canvas.save();
 
-        camera.rotateX(10);
-        canvas.translate(-100, -100);
-        camera.applyToCanvas(canvas);
-        canvas.translate(0, 0);
+        camera.save(); // 保存 Camera 的状态
+        camera.rotateX(30); // 旋转 Camera 的三维空间
+        canvas.translate(100, 100); // 旋转之后把投影移动回来
+        camera.applyToCanvas(canvas); // 把旋转投影到 Canvas
+        canvas.translate(-100, -100); // 旋转之前把绘制内容移动到轴心（原点）
+        camera.restore(); // 恢复 Camera 的状态
+
         canvas.drawBitmap(mBitmap, point1.x, point1.y, mPaint);
         canvas.restore();
 
