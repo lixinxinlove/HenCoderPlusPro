@@ -69,16 +69,20 @@ public class MyProgress extends View {
         rectF = new RectF(100, 100, 500, 450);
         progress = 0;
         animator = ObjectAnimator.ofFloat(this, "progress", 0, 100);
-        animatorColor = ObjectAnimator.ofArgb(this, "progressColor", 0xffff0000, 0xff00ff00);
         animator.setDuration(4000);
-        animatorColor.setDuration(4000);
         animator.setRepeatCount(-1);
         animator.setInterpolator(new BounceInterpolator());
+
+
+        animatorColor = ObjectAnimator.ofArgb(this, "progressColor", 0xffff0000, 0xff00ff00);
+        animatorColor.setDuration(4000);
+        animatorColor.setRepeatCount(-1);
         animatorColor.setInterpolator(new BounceInterpolator());
 
         animationSet = new AnimatorSet();
         animationSet.playTogether(animator, animatorColor);
         animationSet.start();
+
     }
 
 
@@ -86,6 +90,7 @@ public class MyProgress extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         mPaint.setColor(progressColor);
+        mPaintText.setColor(progressColor);
         canvas.drawArc(rectF, 150, progress * 2.4f, false, mPaint);
         canvas.drawText((int) progress + "%", 270, 260, mPaintText);
     }
@@ -106,5 +111,6 @@ public class MyProgress extends View {
 
     public void setProgressColor(int progressColor) {
         this.progressColor = progressColor;
+        invalidate();
     }
 }
