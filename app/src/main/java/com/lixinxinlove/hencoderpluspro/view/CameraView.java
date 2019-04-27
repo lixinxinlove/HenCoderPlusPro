@@ -46,6 +46,7 @@ public class CameraView extends View {
 
     private void init(Context context) {
 
+
         mBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.meinu);
 
         mPaint = new Paint();
@@ -64,7 +65,7 @@ public class CameraView extends View {
 
         camera = new Camera();
 
-        point1 = new Point(50, 50);
+        point1 = new Point(150, 150);
         point2 = new Point(200, 200);
 
     }
@@ -90,12 +91,11 @@ public class CameraView extends View {
         canvas.save();
 
         camera.save(); // 保存 Camera 的状态
-        camera.rotateX(30); // 旋转 Camera 的三维空间
-        canvas.translate(100, 100); // 旋转之后把投影移动回来
+        camera.rotateX(15); // 旋转 Camera 的三维空间
+        canvas.translate(point1.x + mBitmap.getWidth()/2, point1.y + mBitmap.getHeight()/2); // 旋转之后把投影移动回来
         camera.applyToCanvas(canvas); // 把旋转投影到 Canvas
-        canvas.translate(-100, -100); // 旋转之前把绘制内容移动到轴心（原点）
+        canvas.translate(-(point1.x + mBitmap.getWidth()/2), -(point1.y + mBitmap.getHeight()/2)); // 旋转之前把绘制内容移动到轴心（原点）
         camera.restore(); // 恢复 Camera 的状态
-
         canvas.drawBitmap(mBitmap, point1.x, point1.y, mPaint);
         canvas.restore();
 
