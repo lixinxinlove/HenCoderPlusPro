@@ -48,7 +48,7 @@ public class AvatarView2 extends View {
         shader = new ComposeShader(shader1, shader2, PorterDuff.Mode.SRC_OVER);
 
         paint = new Paint();
-        //setLayerType(LAYER_TYPE_SOFTWARE, null);
+        //setLayerType(LAYER_TYPE_SOFTWARE, null);  //关闭硬件加速
 
     }
 
@@ -67,16 +67,17 @@ public class AvatarView2 extends View {
 
         //canvas.drawRect(0,0,500, 500, paint);
 
+        paint.setColor(getResources().getColor(R.color.colorAccent));
+
+        canvas.drawOval(0, 0, bitmap1.getWidth() + 5, bitmap1.getHeight() + 5, paint);
+
         int sc = canvas.saveLayer(0, 0, getWidth(), getHeight(), null, Canvas.ALL_SAVE_FLAG);
 
-
-        //canvas.drawBitmap(bitmap2, 20, 20, paint);
-
-        canvas.drawOval(0, 0, bitmap1.getWidth(), bitmap1.getHeight(), paint);
+        canvas.drawOval(5, 5, bitmap1.getWidth(), bitmap1.getHeight(), paint);
 
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
 
-        canvas.drawBitmap(bitmap1, 0, 0, paint);
+        canvas.drawBitmap(bitmap1, 5, 5, paint);
 
         paint.setXfermode(null);
 
