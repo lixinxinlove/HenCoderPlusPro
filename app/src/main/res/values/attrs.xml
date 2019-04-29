@@ -7,4 +7,10 @@
     </declare-styleable>
 
 
+    <declare-styleable name="CircleImageView">
+        <attr name="circleColor" format="color" />
+        <attr name="circleWidth" format="dimension" />
+    </declare-styleable>
+
+
 </resources>
