@@ -100,6 +100,7 @@ public class CircleImageView extends androidx.appcompat.widget.AppCompatImageVie
         circlePaint.setColor(circleColor);
         canvas.drawOval(10, 10, bitmapWH + circleWidth, bitmapWH + circleWidth, circlePaint);
 
+        //使用 Xfermode 之前需要 离屏缓冲
         int sc = canvas.saveLayer(10, 10, bitmapWH + circleWidth, bitmapWH + circleWidth, null, Canvas.ALL_SAVE_FLAG);
 
         canvas.drawOval(10 + circleWidth / 2, 10 + circleWidth / 2, bitmapWH + circleWidth / 2, bitmapWH + circleWidth / 2, bitmapPaint);
