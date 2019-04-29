@@ -3,6 +3,7 @@ package com.lixinxinlove.hencoderpluspro.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
@@ -32,6 +33,9 @@ public class CircleImageView extends androidx.appcompat.widget.AppCompatImageVie
 
     private int size;
 
+
+    private Bitmap bitmap2;
+
     public CircleImageView(Context context) {
         this(context, null, 0);
     }
@@ -49,10 +53,11 @@ public class CircleImageView extends androidx.appcompat.widget.AppCompatImageVie
         circlePaint = new Paint();
         circlePaint.setAntiAlias(true);
 
-
         bitmapPaint = new Paint();
         bitmapPaint.setAntiAlias(true);
 
+
+        bitmap2 = BitmapFactory.decodeResource(getResources(), R.mipmap.logo);
     }
 
 
@@ -106,6 +111,10 @@ public class CircleImageView extends androidx.appcompat.widget.AppCompatImageVie
         bitmapPaint.setXfermode(null);
 
         canvas.restoreToCount(sc);
+
+
+        canvas.drawBitmap(bitmap2, 10 + bitmap.getWidth() / 2 - bitmap2.getWidth() / 2, 10 + bitmap.getWidth() / 2 - bitmap2.getHeight() / 2, bitmapPaint);
+
 
     }
 }
